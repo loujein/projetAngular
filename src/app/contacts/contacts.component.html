@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header" style="color: cornflowerblue;">
+            <strong>
+                <h5> Liste des contacts </h5>
+            </strong>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <label><strong> Mot clé: </strong> </label>
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <input type="text" placeholder="Entrez le mot clé ici " [(ngModel)]="motCle" />
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                    <button type="button" class="btn btn-info" (click)="searchByMotCle()">Chercher</button>
+                </div>
+            </div>
+
+            <table class="table table-striped">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prenom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Visualiser</th>
+                </tr>
+
+                <tr *ngFor="let contact of pageContacts?.content ">
+
+                    <td> {{ contact.id}}</td>
+                    <td> {{ contact.nom}}</td>
+                    <td> {{ contact.prenom}}</td>
+                    <td> {{ contact.email}}</td>
+                    <td (click) ="onEditContact(contact.id)" class="clickable" style="color:cornflowerblue"> <strong>Editer</strong></td>
+                    <td (click) ="onDelete(contact)" class="clickable" style="color:red"> <strong>Supprimer</strong></td>
+                </tr>
+            </table>
+            <div class="container">
+
+                <ul class="nav nav-pills">
+                    <li  *ngFor="let page of pages; let i=index">
+                        <a [ngClass]="{'active': i==currentPage,'nav-link': true, 'clickable':true }" (click)="gotoPage(i)">{{i}}</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
